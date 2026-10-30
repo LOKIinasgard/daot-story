@@ -1,0 +1,22 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_sword"
+    },
+    "title": {
+      "text": "Path of the Attack"
+    },
+    "description": {
+      "text": "Твоя история начинается за стенами."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "started": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

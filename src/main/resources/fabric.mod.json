@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "daot-story",
+  "version": "0.3.0",
+  "name": "DAOT: Path of the Attack",
+  "description": "Story campaign addon for Danny's AoT. Experience a fate similar to Eren Yeager in the world of Titans.",
+  "authors": [
+    "Grok"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.daotstory.DaotStory"
+    ],
+    "client": [
+      "com.daotstory.DaotStoryClient"
+    ]
+  },
+  "mixins": [
+    "daot-story.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "dannys-aot": "*"
+  }
+}

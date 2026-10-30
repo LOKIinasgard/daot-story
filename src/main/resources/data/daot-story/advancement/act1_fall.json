@@ -1,0 +1,22 @@
+{
+  "parent": "daot-story:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:tnt"
+    },
+    "title": {
+      "text": "Акт 1 — Падение"
+    },
+    "description": {
+      "text": "Стена рухнула. Твой мир изменился навсегда."
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

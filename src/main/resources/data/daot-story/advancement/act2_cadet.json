@@ -1,0 +1,22 @@
+{
+  "parent": "daot-story:act1_fall",
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_chestplate"
+    },
+    "title": {
+      "text": "Акт 2 — Кадет"
+    },
+    "description": {
+      "text": "Ты вступил в Тренировочный корпус. Теперь ты учишься выживать."
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
