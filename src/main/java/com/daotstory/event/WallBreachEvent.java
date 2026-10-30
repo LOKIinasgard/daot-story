@@ -23,6 +23,8 @@ import java.util.Optional;
 public class WallBreachEvent {
 
     private static boolean hasTriggered = false;
+    // Точка стены, заданная командой /daotstory setwall (null = не задана)
+    private static BlockPos wallPos = null;
 
     public static void trigger(MinecraftServer server) {
         if (hasTriggered) return;
@@ -102,12 +104,21 @@ public class WallBreachEvent {
             return;
         }
 
-        // Позиция спавна — в 60-90 блоках по горизонтали, высоко
-        double angle = world.random.nextDouble() * Math.PI * 2;
-        double dist = 70 + world.random.nextDouble() * 30;
-        double x = nearPos.getX() + Math.cos(angle) * dist;
-        double z = nearPos.getZ() + Math.sin(angle) * dist;
-        double y = nearPos.getY() + 40; // высоко над землёй
+        // Позиция спавна: у заданной стены, иначе далеко от игрока
+        double x;
+        double y;
+        double z;
+        if (wallPos != null) {
+            x = wallPos.getX() + 0.5;
+            y = wallPos.getY();
+            z = wallPos.getZ() + 0.5;
+        } else {
+            double angle = world.random.nextDouble() * Math.PI * 2;
+            double dist = 120 + world.random.nextDouble() * 30;
+            x = nearPos.getX() + Math.cos(angle) * dist;
+            z = nearPos.getZ() + Math.sin(angle) * dist;
+            y = nearPos.getY();
+        }
 
         Entity colossal = colossalType.create(world);
         if (colossal != null) {
@@ -115,6 +126,18 @@ public class WallBreachEvent {
             world.spawnEntity(colossal);
             DaotStory.LOGGER.info("Colossal Titan spawned at " + x + ", " + y + ", " + z);
         }
+    }
+
+    public static void setWall(BlockPos pos) {
+        wallPos = pos.toImmutable();
+    }
+
+    public static BlockPos getWall() {
+        return wallPos;
+    }
+
+    public static void clearWall() {
+        wallPos = null;
     }
 
     public static boolean hasTriggered() {
