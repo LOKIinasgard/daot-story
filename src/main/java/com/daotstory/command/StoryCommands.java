@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 public class StoryCommands {
@@ -17,6 +18,20 @@ public class StoryCommands {
                             .executes(context -> {
                                 WallBreachEvent.trigger(context.getSource().getServer());
                                 context.getSource().sendFeedback(() -> Text.literal("§cСобытие «Падение стены» запущено."), false);
+                                return 1;
+                            }))
+                    .then(CommandManager.literal("setwall")
+                            .executes(context -> {
+                                ServerPlayerEntity player = context.getSource().getPlayerOrThrow();
+                                WallBreachEvent.setWall(player.getBlockPos());
+                                context.getSource().sendFeedback(() -> Text.literal("§aСтена задана здесь: §e"
+                                        + player.getBlockPos().getX() + " " + player.getBlockPos().getY() + " " + player.getBlockPos().getZ()), false);
+                                return 1;
+                            }))
+                    .then(CommandManager.literal("clearwall")
+                            .executes(context -> {
+                                WallBreachEvent.clearWall();
+                                context.getSource().sendFeedback(() -> Text.literal("§aТочка стены сброшена."), false);
                                 return 1;
                             }))
                     .then(CommandManager.literal("resetbreach")
